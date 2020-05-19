@@ -36,7 +36,7 @@ jobs:
       - name: Install macos dependencies
         if: startsWith(matrix.os, 'macos')
         run: |
-          brew install gtk+3 pygobject3
+          brew install gtk+3 pygobject3 py3cairo
 
       - name: Install python dependencies
         run: |
