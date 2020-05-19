@@ -25,6 +25,9 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
+      - name: versions
+        run: pip --version
+
       - name: Install linux dependencies
         if: startsWith(matrix.os, 'ubuntu')
         run: |
