@@ -127,7 +127,7 @@ setup(
     keywords='protein, molecular dynamics, simulation',
     url='https://foldingathome.org/',
     package_data={'fah': ['*.glade']},
-    python_requires='>=3.5',
+    python_requires='>=3.6',
     **extra_opts)
 
 if sys.platform == 'darwin':
