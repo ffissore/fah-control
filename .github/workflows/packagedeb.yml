@@ -36,12 +36,12 @@ jobs:
       - name: Install macos dependencies
         if: startsWith(matrix.os, 'macos')
         run: |
-          brew install gtk+3 pygobject3 py3cairo
+          brew install gtk+3 pygobject3
 
       - name: Install python dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install setuptools PyGObject
+          pip install setuptools
 
       - name: Install linux python dependencies
         if: startsWith(matrix.os, 'ubuntu')
