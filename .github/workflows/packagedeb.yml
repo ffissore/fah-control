@@ -30,6 +30,11 @@ jobs:
         run: |
           sudo apt-get install python3-all debhelper python3-setuptools devscripts
 
+      - name: Install macos dependencies
+        if: startsWith(matrix.os, 'macos')
+        run: |
+          sudo brew install gtk+3 pygobject3
+
       - name: Install python dependencies
         run: |
           python -m pip install --upgrade pip
@@ -48,7 +53,7 @@ jobs:
       - name: Install macos python dependencies
         if: startsWith(matrix.os, 'macos')
         run: |
-          pip install py2app
+          pip install py2app pycairo
 
       - name: Build
         if: startsWith(matrix.os, 'ubuntu')
