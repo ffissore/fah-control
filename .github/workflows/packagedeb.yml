@@ -72,7 +72,7 @@ jobs:
       # building
       - name: Build
         run: |
-          msys2do python setup.py build sdist
+          msys2do python3 setup.py build sdist
       # post build
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
