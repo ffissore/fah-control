@@ -70,7 +70,7 @@ jobs:
       - name: Install dependencies
         run: |
           msys2do pacman --noconfirm -S mingw-w64-x86_64-gtk3
-          msys2do pacman --noconfirm -S mingw-w64-x86_64-python3-gobject
+          msys2do pacman --noconfirm -S mingw-w64-x86_64-python-gobject
       # building
       - name: Build
         run: |
