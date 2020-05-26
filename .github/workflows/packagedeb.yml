@@ -66,7 +66,7 @@ jobs:
       # system dependencies
       - uses: numworks/setup-msys2@v1
       - name: Install dependencies
-        run: msys2do pacman --noconfirm -S mingw-w64-x86_64-gtk3
+        run: msys2do pacman --noconfirm -S mingw-w64-x86_64-gtk3 mingw-w64-x86_64-python3-gobject
       # building
       - name: Build
         run: |
