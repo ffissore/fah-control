@@ -49,14 +49,6 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.8
-      - name: versions
-        run: |
-          pip --version
-          python --version
 
       # system dependencies
       - uses: numworks/setup-msys2@v1
@@ -68,7 +60,7 @@ jobs:
       - name: Install python dependencies
         run: |
           msys2do python3 -m pip install --upgrade pip
-          msys2do pip install setuptools cx_Freeze
+          msys2do pip3 install setuptools cx_Freeze
       # building
       - name: Build
         run: |
