@@ -52,13 +52,14 @@ jobs:
 
       # system dependencies
       - uses: numworks/setup-msys2@v1
+        with:
+          update: true
       - name: Install dependencies
         run: |
           msys2do pacman --noconfirm -S mingw-w64-x86_64-gtk3
-          msys2do pacman --noconfirm -S mingw-w64-x86_64-python3-gobject
-          msys2do pacman --noconfirm -S mingw-w64-x86_64-python3-pip
+          msys2do pacman --noconfirm -S mingw-w64-x86_64-python-gobject
+          msys2do pacman --noconfirm -S mingw-w64-x86_64-python-pip
           msys2do pacman --noconfirm -S mingw-w64-x86_64-gcc
-          msys2do pacman --noconfirm -S mingw-w64-x86_64-sqlite3
       # python dependencies
       - name: Install python dependencies
         run: |
