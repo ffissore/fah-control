@@ -60,7 +60,6 @@ jobs:
       # python dependencies
       - name: Install python dependencies
         run: |
-          msys2do python3 -m pip install --upgrade pip
           msys2do pip3 install setuptools cx_Freeze
       # building
       - name: Build
