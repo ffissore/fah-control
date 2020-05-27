@@ -57,6 +57,7 @@ jobs:
           msys2do pacman --noconfirm -S mingw-w64-x86_64-gtk3
           msys2do pacman --noconfirm -S mingw-w64-x86_64-python3-gobject
           msys2do pacman --noconfirm -S mingw-w64-x86_64-python3-pip
+          msys2do pacman --noconfirm -S mingw-w64-x86_64-gcc
       # python dependencies
       - name: Install python dependencies
         run: |
