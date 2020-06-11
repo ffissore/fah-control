@@ -87,7 +87,6 @@ jobs:
           vcpkgGitCommitId: c7ab9d3110813979a873b2dbac630a9ab79850dc
       # Now that vcpkg is installed, it is being used to run desired arguments.
       - run: |
-          $VCPKG_ROOT/vcpkg @$vcpkgResponseFile
           $VCPKG_ROOT/vcpkg install gtk:x64-windows
 
 # This workflow will install Python dependencies, run tests and lint with a variety of Python versions
