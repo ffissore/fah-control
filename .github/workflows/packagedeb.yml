@@ -85,7 +85,8 @@ jobs:
         with:
           setupOnly: true
           vcpkgGitCommitId: c7ab9d3110813979a873b2dbac630a9ab79850dc
-          vcpkgArguments: gtk:x64-windows
+      - run: |
+          $VCPKG_ROOT/vcpkg install gtk:x64-windows
       - name: Print a greeting
         run: |
           Get-ChildItem -Path d:\ -Recurse
