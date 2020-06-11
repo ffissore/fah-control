@@ -45,35 +45,49 @@ jobs:
   #      - name: inspect output
   #        run: find
 
+  #  windows_build:
+  #    runs-on: windows-latest
+  #    steps:
+  #      - uses: actions/checkout@v2
+  #
+  #      # system dependencies
+  #      - uses: eine/setup-msys2@v0
+  #      - name: Install dependencies
+  #        run: |
+  #          msys2do pacman --noconfirm -S mingw-w64-x86_64-gtk3
+  #          msys2do pacman --noconfirm -S mingw-w64-x86_64-python3-gobject
+  #          msys2do pacman --noconfirm -S mingw-w64-x86_64-python3-pip
+  #          msys2do pacman --noconfirm -S mingw-w64-x86_64-gcc
+  #      # python dependencies
+  #      - name: Install python dependencies
+  #        run: |
+  #          msys2do pip3 install setuptools cx_Freeze
+  #      # building
+  #      - name: Build
+  #        run: |
+  #          msys2do python3 setup.py build sdist
+  #      # post build
+  #      - name: Upload artifacts
+  #        uses: actions/upload-artifact@v2
+  #        with:
+  #          path: ./dist/FAHControl*.tar.gz
+  #
+  #      - name: inspect output
+  #        run: find
+
   windows_build:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
-
-      # system dependencies
-      - uses: eine/setup-msys2@v0
-      - name: Install dependencies
-        run: |
-          msys2do pacman --noconfirm -S mingw-w64-x86_64-gtk3
-          msys2do pacman --noconfirm -S mingw-w64-x86_64-python3-gobject
-          msys2do pacman --noconfirm -S mingw-w64-x86_64-python3-pip
-          msys2do pacman --noconfirm -S mingw-w64-x86_64-gcc
-      # python dependencies
-      - name: Install python dependencies
-        run: |
-          msys2do pip3 install setuptools cx_Freeze
-      # building
-      - name: Build
-        run: |
-          msys2do python3 setup.py build sdist
-      # post build
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+      # Restore from cache the previously built ports. If cache-miss, download, build vcpkg.
+      - name: Restore from cache and install vcpkg
+        # Download and build vcpkg, without installing any port. If content is cached already, it is a no-op.
+        uses: lukka/run-vcpkg@v3
         with:
-          path: ./dist/FAHControl*.tar.gz
-
-      - name: inspect output
-        run: find
+          setupOnly: true
+      # Now that vcpkg is installed, it is being used to run desired arguments.
+      - run: |
+          $VCPKG_ROOT/vcpkg @$vcpkgResponseFile
+          $VCPKG_ROOT/vcpkg install gtk:x64-windows
 
 # This workflow will install Python dependencies, run tests and lint with a variety of Python versions
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
