@@ -78,6 +78,10 @@ jobs:
   windows_build:
     runs-on: windows-latest
     steps:
+      #- uses: actions/cache@v2
+      #  with:
+      #    path: D:\a\vcpkg
+      #    key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       # Restore from cache the previously built ports. If cache-miss, download, build vcpkg.
       - name: Restore from cache and install vcpkg
         # Download and build vcpkg, without installing any port. If content is cached already, it is a no-op.
@@ -85,6 +89,7 @@ jobs:
         with:
           setupOnly: true
           vcpkgGitCommitId: c7ab9d3110813979a873b2dbac630a9ab79850dc
+          vcpkgDirectory: D:\a\vcpkg
       - run: |
           ${{ env.VCPKG_ROOT }}\vcpkg install gtk:x64-windows
       - name: Print a greeting
