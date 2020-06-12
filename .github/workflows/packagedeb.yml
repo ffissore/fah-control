@@ -10,9 +10,6 @@ on:
     branches: [ master ]
 
 jobs:
-  strategy:
-    matrix:
-      vcpkg-commit-sha: c7ab9d3110813979a873b2dbac630a9ab79850dc
   #  linux_build:
   #    runs-on: ubuntu-latest
   #    steps:
@@ -79,6 +76,9 @@ jobs:
   #        run: find
 
   windows_build:
+    strategy:
+      matrix:
+        vcpkg-commit-sha: c7ab9d3110813979a873b2dbac630a9ab79850dc
     runs-on: windows-latest
     steps:
       #      - name: Cache vcpkg
