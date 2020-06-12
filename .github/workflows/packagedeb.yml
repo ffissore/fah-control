@@ -10,6 +10,9 @@ on:
     branches: [ master ]
 
 jobs:
+  strategy:
+    matrix:
+      vcpkg-commit-sha: c7ab9d3110813979a873b2dbac630a9ab79850dc
   #  linux_build:
   #    runs-on: ubuntu-latest
   #    steps:
@@ -78,19 +81,22 @@ jobs:
   windows_build:
     runs-on: windows-latest
     steps:
-      #- uses: actions/cache@v2
-      #  with:
-      #    path: D:\a\vcpkg
-      #    key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+#      - name: Cache vcpkg
+#        uses: actions/cache@v2
+#        with:
+#          path: D:\a\vcpkg
+#          key: ${{ runner.os }}-vcpkg-${{ matrix.vcpkg-commit-sha }}
       # Restore from cache the previously built ports. If cache-miss, download, build vcpkg.
       - name: Restore from cache and install vcpkg
         # Download and build vcpkg, without installing any port. If content is cached already, it is a no-op.
         uses: lukka/run-vcpkg@v3
         with:
           setupOnly: true
-          vcpkgGitCommitId: c7ab9d3110813979a873b2dbac630a9ab79850dc
+          vcpkgGitCommitId: ${{ matrix.vcpkg-commit-sha }}
           vcpkgDirectory: D:\a\vcpkg
-      - run: |
+      - name: Install gtk
+        id: gtk-vcpkg
+        run: |
           ${{ env.VCPKG_ROOT }}\vcpkg install gtk:x64-windows
       - name: Print a greeting
         run: |
