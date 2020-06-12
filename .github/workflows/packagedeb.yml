@@ -81,11 +81,11 @@ jobs:
   windows_build:
     runs-on: windows-latest
     steps:
-#      - name: Cache vcpkg
-#        uses: actions/cache@v2
-#        with:
-#          path: D:\a\vcpkg
-#          key: ${{ runner.os }}-vcpkg-${{ matrix.vcpkg-commit-sha }}
+      #      - name: Cache vcpkg
+      #        uses: actions/cache@v2
+      #        with:
+      #          path: D:\a\vcpkg
+      #          key: ${{ runner.os }}-vcpkg-${{ matrix.vcpkg-commit-sha }}
       # Restore from cache the previously built ports. If cache-miss, download, build vcpkg.
       - name: Restore from cache and install vcpkg
         # Download and build vcpkg, without installing any port. If content is cached already, it is a no-op.
